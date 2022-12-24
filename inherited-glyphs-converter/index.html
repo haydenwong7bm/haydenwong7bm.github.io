@@ -15,5 +15,22 @@
 			<label for="output">Converted text 已轉換的文字</label><br>
 			<input type="text" id="output" name="output"><br>
 		</div>
+			<h2><label>Options 選項</label></h2>
+			<h3>Use Compatibility Ideographs 使用相容表意文字</h3>
+			<input type="checkbox" id="j" name="j" checked>
+			<label for="j">Japan 日本</label><br>
+			<input type="checkbox" id="k" name="k" checked>
+			<label for="k">South Korea 韓國</label><br>
+			<input type="checkbox" id="t" name="t" checked>
+			<label for="t">CNS 11643</label>
+			<h3>Use Characters on Supplementary Planes 使用輔助平面字符</h3>
+			<select name="supp" id="supp">
+				<option value="">Don't use 不要使用</option>
+				<option value="c" selected="selected">UnihanCore2020</option>
+				<option value="*">All 所有</option>
+			</select>
+			<h3>其他</h3>
+			<input type="checkbox" id="i" name="i" checked>
+			<label for="i">Convert other variants 轉換其他異體字 (e.g. 例如 秘 → 祕, 裡 → 裏)</label>
 	</body>
 </html>
