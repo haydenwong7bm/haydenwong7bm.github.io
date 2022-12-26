@@ -2,7 +2,7 @@
 
 <html>
 	<head>
-		<title>Inherited Glyphs Converter 傳承字形轉換器</title> 
+		<title>傳承字形轉換器 Inherited Glyphs Converter</title> 
 		<meta charset=utf-8>
 		<script src="main.js"></script>
 		<style>
@@ -12,30 +12,28 @@
 		</style>
 	</head>
 	<body>
-		<h1>Inherited Glyphs Converter 傳承字形轉換器</h1>
+		<h1>傳承字形轉換器 Inherited Glyphs Converter</h1>
 		<div class="form">
-			<label for="input">Text to be converted 要轉換的文字</label><br>
+			<label for="input">要轉換的文字 Text to be converted</label><br>
 			<textarea id="input" name="input" rows="4" cols="32"></textarea><br>
-			<button onclick="convert();">Convert 轉換</button><br>
-			<label for="output">Converted text 已轉換的文字</label><br>
-			<textarea id="output" name="output" rows="4" cols="32"></textarea>&nbsp;<button onclick="copy();">Copy 複製</button><br>
+			<button onclick="convert();">轉換 Convert</button><br>
+			<label for="output">已轉換的文字 Converted text</label><br>
+			<textarea id="output" name="output" rows="4" cols="32"></textarea>&nbsp;<button onclick="copy();">複製至剪貼板 Copy to clipboard</button><br>
 		</div>
-			<h2><label>Options 選項</label></h2>
-			<h3>Use Compatibility Ideographs 使用相容表意文字</h3>
+			<h2><label>選項 Options</label></h2>
+			<h3>Use <a href="https://en.wikipedia.org/wiki/CJK_Compatibility_Ideographs>CJK Compatibility Ideographs">CJK Compatibility Ideographs</a> 使用<a href="https://zh.wikipedia.org/wiki/%E4%B8%AD%E6%97%A5%E9%9F%93%E7%9B%B8%E5%AE%B9%E8%A1%A8%E6%84%8F%E6%96%87%E5%AD%97">中日韓相容表意文字</a></h3>
 			<input type="checkbox" id="j" name="j" checked>
 			<label for="j">Japan 日本</label><br>
 			<input type="checkbox" id="k" name="k" checked>
 			<label for="k">South Korea 韓國</label><br>
 			<input type="checkbox" id="t" name="t" checked>
-			<label for="t">CNS 11643</label>
+			<label for="t">CNS 11643 (<a href="https://en.wikipedia.org/wiki/CJK_Compatibility_Ideographs_Supplement">CJK Compatibility Ideographs Supplement</a> <a href="https://zh.wikipedia.org/wiki/%E4%B8%AD%E6%97%A5%E9%9F%93%E7%9B%B8%E5%AE%B9%E8%A1%A8%E6%84%8F%E6%96%87%E5%AD%97%E8%A3%9C%E5%85%85%E5%8D%80">中日韓相容表意文字補充區</a>)</label>
 			<h3>Use Characters on Supplementary Planes 使用輔助平面字符</h3>
-			<select name="supp" id="supp">
-				<option value="">Don't use 不要使用</option>
-				<option value="c" selected="selected">UnihanCore2020</option>
-				<option value="*">All 所有</option>
-			</select>
+			<input type="radio" id="supp" name="supp" value="">Don't use 不要使用<br>
+			<input type="radio" id="supp" name="supp" value="c" checked><a href="https://www.unicode.org/L2/L2019/19388-unihan-core-2020.pdf">UnihanCore2020</a><br>
+			<input type="radio" id="supp" name="supp" value="\*">All 所有<br>
 			<h3>其他</h3>
 			<input type="checkbox" id="i" name="i" checked>
-			<label for="i">Convert other variants 轉換其他異體字 (e.g. 例如 秘 → 祕, 裡 → 裏)</label>
+			<label for="i">Convert other variants 轉換其他異體字 (e.g. 例如 祕 → 祕, 裡 → 裏)</label>
 	</body>
 </html>
