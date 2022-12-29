@@ -31,21 +31,21 @@ function convert() {
 			
 			for (let i = 0; i < table.length; i++) {
 				if (table[i].length == 2) {
-					text_input = text_input.replace(table[i][0], table[i][1]);
+					text_input = text_input.replaceAll(table[i][0], table[i][1]);
 				} else {
 				if (table[i].length == 3) {
 					if (var_options.test(table[i][2])) {
 						if (/[c*]/.test(table[i][2])) {
 							if (supp_option.test(table[i][2])) {
-								text_input = text_input.replace(table[i][0], table[i][1]);
+								text_input = text_input.replaceAll(table[i][0], table[i][1]);
 							}
 						} else {
-							text_input = text_input.replace(table[i][0], table[i][1]);
+							text_input = text_input.replaceAll(table[i][0], table[i][1]);
 						}
 					} else {
 						if (/[c*]/.test(table[i][2])) {
 							if (supp_option.test(table[i][2])) {
-								text_input = text_input.replace(table[i][0], table[i][1]);
+								text_input = text_input.replaceAll(table[i][0], table[i][1]);
 							}
 						}
 					}
