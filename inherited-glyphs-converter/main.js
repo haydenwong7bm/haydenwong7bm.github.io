@@ -21,12 +21,11 @@ function convert() {
 	var converted = text_input;
 	var replace;
 	
-	for (const i in text_input) {
-		chr = text_input[i];
-		value = text_input[i];
+	for (const chr of text_input) {
+		value = chr;
 		replace = false;
 		
-		if (value in BASIC_TABLE) {
+		if (BASIC_TABLE[value] !== undefined) {
 			if (BASIC_TABLE[value].length == 1) {
 				replace = true;
 			} else {
@@ -46,7 +45,7 @@ function convert() {
 			}
 		}
 		
-		if (value in COMPATIBILITY_TABLE) {
+		if (COMPATIBILITY_TABLE[value] !== undefined) {
 			attr = COMPATIBILITY_TABLE[value][1];
 			
 			supp1 = attr.includes("*");
@@ -60,7 +59,7 @@ function convert() {
 			}
 		}
 		
-		if (chr in RADICALS_VARIANTS_TABLE) {
+		if (RADICALS_VARIANTS_TABLE[value] !== undefined) {
             value = RADICALS_VARIANTS_TABLE[chr];
             replace = true;
 		}
