@@ -3,17 +3,11 @@ function convert() {
 	
 	use_inherited = document.getElementById('i').checked;
 	
-	var comp_options = '';
+	var comp_options = "";
 	
-	if (document.getElementById('j').checked) {
-		comp_options += "j";
-	}
-	if (document.getElementById('k').checked) {
-		comp_options += "k";
-	}
-	if (document.getElementById('t').checked) {
-		comp_options += "t";
-	}
+	comp_options += "j".repeat(document.getElementById("j").checked);
+	comp_options += "k".repeat(document.getElementById("k").checked);
+	comp_options += "t".repeat(document.getElementById("t").checked);
 	
 	comp_options = new RegExp("[" + comp_options + "]");
 	
@@ -29,10 +23,12 @@ function convert() {
 			if (BASIC_TABLE[value].length == 1) {
 				replace = true;
 			} else {
-				supp1 = BASIC_TABLE[value][1].includes("*");
-				supp2 = BASIC_TABLE[value][1].includes(supp_option);
+				attr = BASIC_TABLE[value][1];
 				
-				inhr = BASIC_TABLE[value][1].includes("i");
+				supp1 = attr.includes("*");
+				supp2 = attr.includes(supp_option);
+				
+				inhr = attr.includes("i");
 				
 				replace = !(supp1 && !supp2);
 				if (replace && inhr) {
@@ -49,10 +45,10 @@ function convert() {
 			attr = COMPATIBILITY_TABLE[value][1];
 			
 			supp1 = attr.includes("*");
-			supp2 = comp_options.test(attr);
+			supp2 = attr.includes(supp_option);
 			
 			replace = !(supp1 && !supp2);
-            replace = replace && comp_options.test(attr);
+			replace = replace && comp_options.test(attr);
 			
 			if (replace) {
 				value = COMPATIBILITY_TABLE[value][0];
