@@ -1,15 +1,30 @@
+const J = 'j';
+const K = 'k';
+const T = 't';
+
 function convert() {
 	var supp_option = document.querySelector('input[name="supp"]:checked').value;
 	
-	use_inherited = document.getElementById('i').checked;
+	var use_inherited = document.getElementById('i').checked;
 	
 	var comp_options = "";
 	
-	comp_options += "j".repeat(document.getElementById("j").checked);
-	comp_options += "k".repeat(document.getElementById("k").checked);
-	comp_options += "t".repeat(document.getElementById("t").checked);
-	
-	comp_options = new RegExp("[" + comp_options + "]");
+	var comp_order = [];
+	for (const opt of [J, K, T]) {
+		if (document.getElementById(opt).checked) {
+			switch (opt) {
+				case J:
+					comp_order.push(J_TABLE);
+					break;
+				case K:
+					comp_order.push(K_TABLE);
+					break;
+				case T:
+					comp_order.push(T_TABLE);
+					break;
+			}
+		}
+	}
 	
 	var text_input = document.getElementById('input').value;
 	var converted = text_input;
@@ -20,9 +35,9 @@ function convert() {
 		replace = false;
 		
 		if (BASIC_TABLE[value] !== undefined) {
-			value_char = BASIC_TABLE[value][0];
+			const value_char = BASIC_TABLE[value][0];
 			
-			attr = BASIC_TABLE[value][1];
+			const attr = BASIC_TABLE[value][1];
 			if (attr == undefined) {
 				attr = "";
 			}
@@ -45,23 +60,23 @@ function convert() {
 			}
 		}
 		
-		if (COMPATIBILITY_TABLE[value] !== undefined) {
-			value_char = COMPATIBILITY_TABLE[value][0];
-			attr = COMPATIBILITY_TABLE[value][1];
-			
-			if (value.codePointAt(0) <= 0xFFFF && value_char.codePointAt(0) > 0xFFFF) {
-				replace = Boolean(supp_option);
-				if (supp_option == "c") {
-					replace = attr.includes(supp_option);
+		for (var table of [J_TABLE, K_TABLE, T_TABLE]) {
+			if (table[value] !== undefined) {
+				const value_char = table[value][0];
+				const attr = table[value][1];
+				
+				if (value.codePointAt(0) <= 0xFFFF && value_char.codePointAt(0) > 0xFFFF) {
+					replace = Boolean(supp_option);
+					if (supp_option == "c") {
+						replace = attr.includes(supp_option);
+					}
+				} else {
+					replace = true;
 				}
-			} else {
-				replace = true;
-			}
-			
-			replace = replace && comp_options.test(attr);
-			
-			if (replace) {
-				value = value_char;
+				
+				if (replace) {
+					value = value_char;
+				}
 			}
 		}
 		
@@ -1404,7 +1419,7 @@ BASIC_TABLE = {
 	"叱": ["𠮟", "ic"],
 };
 
-COMPATIBILITY_TABLE = {
+J_TABLE = {
 	"虜": ["虜", "j"],
 	"晴": ["晴", "j"],
 	"猪": ["猪", "j"],
@@ -1468,6 +1483,12 @@ COMPATIBILITY_TABLE = {
 	"逸": ["逸", "j"],
 	"難": ["難", "j"],
 	"響": ["響", "j"],
+	"廊": ["廊", "jk"],
+	"朗": ["朗", "jk"],
+	"類": ["類", "jk"],
+};
+
+K_TABLE = {
 	"廊": ["廊", "jk"],
 	"朗": ["朗", "jk"],
 	"類": ["類", "jk"],
@@ -1622,6 +1643,9 @@ COMPATIBILITY_TABLE = {
 	"宅": ["宅", "k"],
 	"洞": ["洞", "k"],
 	"廓": ["廓", "k"],
+};
+
+T_TABLE = {
 	"丽": ["丽", "t"],
 	"備": ["備", "t"],
 	"具": ["具", "t"],
