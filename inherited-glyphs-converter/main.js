@@ -37,7 +37,7 @@ function convert() {
 		if (BASIC_TABLE[value] !== undefined) {
 			const value_char = BASIC_TABLE[value][0];
 			
-			const attr = BASIC_TABLE[value][1];
+			var attr = BASIC_TABLE[value][1];
 			if (attr == undefined) {
 				attr = "";
 			}
@@ -63,7 +63,7 @@ function convert() {
 		for (var table of [J_TABLE, K_TABLE, T_TABLE]) {
 			if (table[value] !== undefined) {
 				const value_char = table[value][0];
-				const attr = table[value][1];
+				var attr = table[value][1];
 				
 				if (value.codePointAt(0) <= 0xFFFF && value_char.codePointAt(0) > 0xFFFF) {
 					replace = Boolean(supp_option);
