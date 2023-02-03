@@ -2,45 +2,6 @@
 
 <html>
 	<head>
-		<title>傳承字形轉換器 Inherited Glyphs Converter</title> 
-		<meta charset=utf-8>
-		<!-- <meta http-equiv="refresh" content="0; URL=zh-tc" /> -->
-		<script src="main.js"></script>
-		<style>
-			textarea {
-				resize: none;
-			}
-		</style>
+		<meta http-equiv="refresh" content="0; URL=zh-tc" />
 	</head>
-	<body>
-		<h1>傳承字形轉換器 Inherited Glyphs Converter</h1>
-		<h3><a href="https://github.com/haydenwong7bm/inherited-glyphs-converter">GitHub Page</a></h3>
-		<div class="form">
-			<label for="input">要轉換的文字 Text to be converted</label><br>
-			<textarea id="input" name="input" rows="4" cols="32"></textarea><br>
-			<button onclick="convert();">轉換 Convert</button><br>
-			<label for="output">已轉換的文字 Converted text</label><br>
-			<textarea id="output" name="output" rows="4" cols="32"></textarea>&nbsp;<button onclick="copy();">複製至剪貼板 Copy to clipboard</button><br>
-		</div>
-		<h2><label>選項 Options</label></h2>
-		<h3>使用<a href="https://zh.wikipedia.org/wiki/%E4%B8%AD%E6%97%A5%E9%9F%93%E7%9B%B8%E5%AE%B9%E8%A1%A8%E6%84%8F%E6%96%87%E5%AD%97">中日韓相容表意文字</a> Use <a href="https://en.wikipedia.org/wiki/CJK_Compatibility_Ideographs>CJK Compatibility Ideographs">CJK Compatibility Ideographs</a></h3>
-		<input type="checkbox" id="j" name="j" checked>
-		<label for="j">日本 Japan</label><br>
-		<input type="checkbox" id="k" name="k" checked>
-		<label for="k">韓國 South Korea</label><br>
-		<input type="checkbox" id="t" name="t" checked>
-		<label for="t">CNS 11643 (<a href="https://zh.wikipedia.org/wiki/%E4%B8%AD%E6%97%A5%E9%9F%93%E7%9B%B8%E5%AE%B9%E8%A1%A8%E6%84%8F%E6%96%87%E5%AD%97%E8%A3%9C%E5%85%85%E5%8D%80">中日韓相容表意文字補充區</a> <a href="https://en.wikipedia.org/wiki/CJK_Compatibility_Ideographs_Supplement">CJK Compatibility Ideographs Supplement</a>)</label>
-		<h3>使用輔助平面字符 Use Characters on Supplementary Planes</h3>
-		<input type="radio" id="supp-no" name="supp" value="">
-		<label for="supp-no">不要使用 Don't use<label><br>
-		<input type="radio" id="supp-c" name="supp" value="c" checked>
-		<label for="supp-c"><a href="https://www.unicode.org/L2/L2019/19388-unihan-core-2020.pdf">UnihanCore2020</a> + <a href="https://github.com/adobe-type-tools/Adobe-Japan1">Adobe-Japan1</a></label><br>
-		<input type="radio" id="supp-*" name="supp" value="\*">
-		<label for="supp-*">所有 All</label><br>
-		<h3>其他 Others</h3>
-		<input type="checkbox" id="i" name="i" checked>
-		<label for="i">轉換其他異體字 Convert other variants (e.g. 例如 秘 → 祕, 裡 → 裏)</label><br>
-		<!-- <input type="checkbox" id="ivs" name="ivs">
-		<label for="ivs">使用Adobe-Japan1異體字選擇器序列 Use Adobe-Japan1 IVS</label> -->
-	</body>
 </html>
