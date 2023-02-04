@@ -1,10 +1,6 @@
 textarea {
 	resize: none;
-	width: 100%;
+	width: 95%;
 	max-width: 480px;
 	display: block;
-}
-
-html {
-	margin: default 2px;
 }
