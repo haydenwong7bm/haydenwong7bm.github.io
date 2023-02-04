@@ -4,3 +4,7 @@ textarea {
 	max-width: 480px;
 	display: block;
 }
+
+html {
+	margin: default 2px;
+}
