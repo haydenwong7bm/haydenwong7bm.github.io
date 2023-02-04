@@ -2,14 +2,10 @@
 
 <html lang="en">
 	<head>
-		<title>Inherited Glyphs Converter</title> 
-		<meta charset=utf-8>
+		<title>Inherited Glyphs Converter</title>
+		<meta charset=utf-8 name="viewport" content="width=device-width, initial-scale=1.0">
 		<script src="../main.js"></script>
-		<style>
-			textarea {
-				resize: none;
-			}
-		</style>
+		<link rel="stylesheet" href="../styles.css">
 	</head>
 	<body>
 		<p style="text-align:left;">
@@ -21,10 +17,11 @@
 		<h3><a href="https://github.com/haydenwong7bm/inherited-glyphs-converter">GitHub Page</a></h3>
 		<div class="form">
 			<label for="input">Text to be converted</label><br>
-			<textarea id="input" name="input" rows="4" cols="32"></textarea><br>
+			<textarea id="input" name="input" rows="5"></textarea>
 			<button onclick="convert();">Convert</button><br>
 			<label for="output">Converted text</label><br>
-			<textarea id="output" name="output" rows="4" cols="32"></textarea>&nbsp;<button onclick="copy();">Copy to clipboard</button><br>
+			<textarea id="output" name="output" rows="5"></textarea>
+			<button onclick="copy();">Copy to clipboard</button>
 		</div>
 		<h2><label>Options</label></h2>
 		<h3>Use <a href="https://en.wikipedia.org/wiki/CJK_Compatibility_Ideographs>CJK Compatibility Ideographs">CJK Compatibility Ideographs</a></h3>
@@ -38,7 +35,7 @@
 		<input type="radio" id="supp-no" name="supp" value="">
 		<label for="supp-no">Don't use<label><br>
 		<input type="radio" id="supp-c" name="supp" value="c" checked>
-		<label for="supp-c"><a href="https://www.unicode.org/L2/L2019/19388-unihan-core-2020.pdf">UnihanCore2020</a> + <a href="https://github.com/adobe-type-tools/Adobe-Japan1">Adobe-Japan1</a></label><br>
+		<label for="supp-c">Only use <a href="https://www.unicode.org/L2/L2019/19388-unihan-core-2020.pdf">UnihanCore2020</a> and <a href="https://github.com/adobe-type-tools/Adobe-Japan1">Adobe-Japan1</a></label><br>
 		<input type="radio" id="supp-*" name="supp" value="\*">
 		<label for="supp-*">All</label><br>
 		<h3>Others</h3>

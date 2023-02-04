@@ -2,14 +2,10 @@
 
 <html lang="zh-Hant">
 	<head>
-		<title>傳承字形轉換器</title> 
-		<meta charset=utf-8>
+		<title>傳承字形轉換器</title>
+		<meta charset=utf-8 name="viewport" content="width=device-width, initial-scale=1.0">
 		<script src="../main.js"></script>
-		<style>
-			textarea {
-				resize: none;
-			}
-		</style>
+		<link rel="stylesheet" href="../styles.css">
 	</head>
 	<body>
 		<p style="text-align:left;">
@@ -21,10 +17,11 @@
 		<h3><a href="https://github.com/haydenwong7bm/inherited-glyphs-converter">GitHub專頁</a></h3>
 		<div class="form">
 			<label for="input">要轉換的文字</label><br>
-			<textarea id="input" name="input" rows="4" cols="32"></textarea><br>
+			<textarea id="input" name="input" rows="5"></textarea>
 			<button onclick="convert();">轉換</button><br>
 			<label for="output">已轉換的文字</label><br>
-			<textarea id="output" name="output" rows="4" cols="32"></textarea>&nbsp;<button onclick="copy();">複製至剪貼板</button><br>
+			<textarea id="output" name="output" rows="5"></textarea>
+			<button onclick="copy();">複製至剪貼板</button>
 		</div>
 		<h2><label>選項</label></h2>
 		<h3>使用<a href="https://zh.wikipedia.org/wiki/%E4%B8%AD%E6%97%A5%E9%9F%93%E7%9B%B8%E5%AE%B9%E8%A1%A8%E6%84%8F%E6%96%87%E5%AD%97">中日韓相容表意文字</a></h3>
@@ -38,7 +35,7 @@
 		<input type="radio" id="supp-no" name="supp" value="">
 		<label for="supp-no">不使用<label><br>
 		<input type="radio" id="supp-c" name="supp" value="c" checked>
-		<label for="supp-c"><a href="https://www.unicode.org/L2/L2019/19388-unihan-core-2020.pdf">UnihanCore2020</a> + <a href="https://github.com/adobe-type-tools/Adobe-Japan1">Adobe-Japan1</a></label><br>
+		<label for="supp-c">只使用<a href="https://www.unicode.org/L2/L2019/19388-unihan-core-2020.pdf">UnihanCore2020</a>及<a href="https://github.com/adobe-type-tools/Adobe-Japan1">Adobe-Japan1</a></label><br>
 		<input type="radio" id="supp-*" name="supp" value="\*">
 		<label for="supp-*">所有</label><br>
 		<h3>其他</h3>

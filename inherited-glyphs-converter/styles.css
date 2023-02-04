@@ -1,0 +1,6 @@
+textarea {
+	resize: none;
+	width: 100%;
+	max-width: 480px;
+	display: block;
+}
