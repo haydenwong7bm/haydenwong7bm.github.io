@@ -60,7 +60,7 @@ function convert() {
 			}
 		}
 		
-		for (var table of [J_TABLE, K_TABLE, T_TABLE]) {
+		for (var table of comp_order) {
 			if (table[value] !== undefined) {
 				const value_char = table[value][0];
 				var attr = table[value][1];
