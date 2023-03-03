@@ -64,10 +64,7 @@ function convert() {
 				var attr = table[value][1];
 				
 				if (value.codePointAt(0) <= 0xFFFF && value_char.codePointAt(0) > 0xFFFF) {
-					replace = Boolean(supp_option);
-					if (supp_option == "c") {
-						replace = attr.includes(supp_option);
-					}
+					replace = (supp_option == "*") || (attr !== undefined && attr.includes("c"));
 				} else {
 					replace = true;
 				}
