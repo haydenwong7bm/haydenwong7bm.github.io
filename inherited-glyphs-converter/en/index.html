@@ -7,7 +7,7 @@
 		<script src="../main.js"></script>
 		<link rel="stylesheet" href="../styles.css">
 	</head>
-	<body>
+	<body onload="initOutputBox();">
 		<p style="text-align:left;">
 			<span style="font-size:28px; font-weight:bold">Inherited Glyphs Converter</span>
 			<span style="float:right;">
@@ -19,15 +19,19 @@
 			<label for="input">Text to be converted</label><br>
 			<textarea id="input" name="input" rows="3" lang=""></textarea>
 			<button onclick="convert();">Convert</button>
-			<button onclick="paste();">Paste from clipboard</button>
-			<br>
-			<label for="output">Converted text</label>
-			<br>
-			<small>Korean locale</small><br>
-			<textarea id="output_k" rows="3" lang="ko" readonly></textarea>
-			<small>System language locale</small><br>
-			<textarea id="output" rows="3" lang="" readonly></textarea>
-			<button onclick="copy();">Copy to clipboard</button>
+			<button onclick="paste();">Paste from clipboard</button><br>
+			
+			<label for="output">Converted text</label><br>
+			<span id="output_textarea"></span>
+			<button onclick="copy();">Copy to clipboard</button><br>
+			
+			<b><label>Locale</label></b><br>
+			<input type="radio" id="locale-ko" name="locale" value="ko" onclick="changeLocale();" checked>
+			<label for="locale-ko">South Korea</label><br>
+			<input type="radio" id="locale-ja" name="locale" value="ja" onclick="changeLocale();">
+			<label for="locale-ja">Japan</label><br>
+			<input type="radio" id="locale-" name="locale" value="" onclick="changeLocale();">
+			<label for="locale-">System Setting</label>
 		</div>
 		<h2><label>Options</label></h2>
 		<h3>Use <a href="https://en.wikipedia.org/wiki/CJK_Compatibility_Ideographs>CJK Compatibility Ideographs">CJK Compatibility Ideographs</a></h3>

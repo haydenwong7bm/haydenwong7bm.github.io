@@ -7,7 +7,7 @@
 		<script src="../main.js"></script>
 		<link rel="stylesheet" href="../styles.css">
 	</head>
-	<body>
+	<body onload="initOutputBox();">
 		<p style="text-align:left;">
 			<span style="font-size:28px; font-weight:bold">傳承字形轉換器</span>
 			<span style="float:right;">
@@ -19,35 +19,41 @@
 			<label for="input">要轉換的文字</label>
 			<textarea id="input" name="input" rows="3" lang=""></textarea>
 			<button onclick="convert();">轉換</button>
-			<button onclick="paste();">從剪貼板貼上</button>
-			<br>
-			<label for="output">已轉換的文字</label>
-			<br>
-			<small>韓文語言環境</small><br>
-			<textarea id="output_k" rows="3" lang="ko" readonly></textarea>
-			<small>系統語言環境</small><br>
-			<textarea id="output" rows="3" lang="" readonly></textarea>
-			<button onclick="copy();">複製至剪貼板</button>
+			<button onclick="paste();">從剪貼板貼上</button><br>
+			
+			<label for="output">已轉換的文字</label><br>
+			<span id="output_textarea"></span>
+			<button onclick="copy();">複製至剪貼板</button><br>
+			
+			<b><label>語言環境</label></b><br>
+			<input type="radio" id="locale-ko" name="locale" value="ko" onclick="changeLocale();" checked>
+			<label for="locale-ko">韓國</label><br>
+			<input type="radio" id="locale-ja" name="locale" value="ja" onclick="changeLocale();">
+			<label for="locale-ja">日本</label><br>
+			<input type="radio" id="locale-" name="locale" value="" onclick="changeLocale();">
+			<label for="locale-">系統設定</label>
 		</div>
-		<h2><label>選項</label></h2>
-		<h3>使用<a href="https://zh.wikipedia.org/wiki/%E4%B8%AD%E6%97%A5%E9%9F%93%E7%9B%B8%E5%AE%B9%E8%A1%A8%E6%84%8F%E6%96%87%E5%AD%97">中日韓相容表意文字</a></h3>
-		<input type="checkbox" id="j" name="j" checked>
-		<label for="j">日本</label><br>
-		<input type="checkbox" id="k" name="k" checked>
-		<label for="k">韓國</label><br>
-		<input type="checkbox" id="t" name="t" checked>
-		<label for="t"><a href="https://zh.wikipedia.org/wiki/%E4%B8%AD%E6%97%A5%E9%9F%93%E7%9B%B8%E5%AE%B9%E8%A1%A8%E6%84%8F%E6%96%87%E5%AD%97%E8%A3%9C%E5%85%85%E5%8D%80">CNS 11643</a></h3>
-		<h3>使用輔助平面字符</h3>
-		<input type="radio" id="supp-no" name="supp" value="">
-		<label for="supp-no">不使用<label><br>
-		<input type="radio" id="supp-c" name="supp" value="c" checked>
-		<label for="supp-c">只使用<a href="https://www.unicode.org/L2/L2019/19388-unihan-core-2020.pdf">UnihanCore2020</a>及<a href="https://github.com/adobe-type-tools/Adobe-Japan1">Adobe-Japan1</a></label><br>
-		<input type="radio" id="supp-*" name="supp" value="*">
-		<label for="supp-*">所有</label><br>
-		<h3>其他</h3>
-		<input type="checkbox" id="i" name="i" checked>
-		<label for="i">轉換其他異體字（例如：秘 → 祕、裡 → 裏）</label><br>
-		<!-- <input type="checkbox" id="ivs" name="ivs">
-		<label for="ivs">使用Adobe-Japan1異體字選擇器序列</label> -->
+		<div>
+			<h2><label>選項</label></h2>
+			<h3>使用<a href="https://zh.wikipedia.org/wiki/%E4%B8%AD%E6%97%A5%E9%9F%93%E7%9B%B8%E5%AE%B9%E8%A1%A8%E6%84%8F%E6%96%87%E5%AD%97">中日韓相容表意文字</a></h3>
+			<input type="checkbox" id="j" name="j" checked>
+			<label for="j">日本</label><br>
+			<input type="checkbox" id="k" name="k" checked>
+			<label for="k">韓國</label><br>
+			<input type="checkbox" id="t" name="t" checked>
+			<label for="t"><a href="https://zh.wikipedia.org/wiki/%E4%B8%AD%E6%97%A5%E9%9F%93%E7%9B%B8%E5%AE%B9%E8%A1%A8%E6%84%8F%E6%96%87%E5%AD%97%E8%A3%9C%E5%85%85%E5%8D%80">CNS 11643</a></h3>
+			<h3>使用輔助平面字符</h3>
+			<input type="radio" id="supp-no" name="supp" value="">
+			<label for="supp-no">不使用<label><br>
+			<input type="radio" id="supp-c" name="supp" value="c" checked>
+			<label for="supp-c">只使用<a href="https://www.unicode.org/L2/L2019/19388-unihan-core-2020.pdf">UnihanCore2020</a>及<a href="https://github.com/adobe-type-tools/Adobe-Japan1">Adobe-Japan1</a></label><br>
+			<input type="radio" id="supp-*" name="supp" value="*">
+			<label for="supp-*">所有</label><br>
+			<h3>其他</h3>
+			<input type="checkbox" id="i" name="i" checked>
+			<label for="i">轉換其他異體字（例如：秘 → 祕、裡 → 裏）</label><br>
+			<!-- <input type="checkbox" id="ivs" name="ivs">
+			<label for="ivs">使用Adobe-Japan1異體字選擇器序列</label> -->
+		</div>
 	</body>
 </html>

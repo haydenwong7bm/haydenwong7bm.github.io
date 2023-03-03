@@ -7,7 +7,7 @@
 		<script src="../main.js"></script>
 		<link rel="stylesheet" href="../styles.css">
 	</head>
-	<body>
+	<body onload="initOutputBox();">
 		<p style="text-align:left;">
 			<span style="font-size:28px; font-weight:bold">传承字形转換器</span>
 			<span style="float:right;">
@@ -19,15 +19,19 @@
 			<label for="input">要转換的文本</label>
 			<textarea id="input" name="input" rows="3" lang=""></textarea>
 			<button onclick="convert();">转換</button>
-			<button onclick="paste();">从剪贴板粘贴</button>
-			<br>
-			<label for="output">已转換的文本</label>
-			<br>
-			<small>韩文語言环境</small><br>
-			<textarea id="output_k" rows="3" lang="ko" readonly></textarea>
-			<small>系统語言环境</small><br>
-			<textarea id="output" rows="3" lang="" readonly></textarea>
-			<button onclick="copy();">拷贝至剪贴板</button>
+			<button onclick="paste();">从剪贴板粘贴</button><br>
+			
+			<label for="output">已转換的文本</label><br>
+			<span id="output_textarea"></span>
+			<button onclick="copy();">拷贝至剪贴板</button><br>
+			
+			<b><label>语言环境</label></b><br>
+			<input type="radio" id="locale-ko" name="locale" value="ko" onclick="changeLocale();" checked>
+			<label for="locale-ko">韩国</label><br>
+			<input type="radio" id="locale-ja" name="locale" value="ja" onclick="changeLocale();">
+			<label for="locale-ja">日本</label><br>
+			<input type="radio" id="locale-" name="locale" value="" onclick="changeLocale();">
+			<label for="locale-">系统设置</label>
 		</div>
 		<h2><label>选项</label></h2>
 		<h3>使用<a href="https://zh.wikipedia.org/wiki/%E4%B8%AD%E6%97%A5%E9%9F%93%E7%9B%B8%E5%AE%B9%E8%A1%A8%E6%84%8F%E6%96%87%E5%AD%97">中日韩兼容表意文字</a></h3>

@@ -2,6 +2,10 @@ const J = 'j';
 const K = 'k';
 const T = 't';
 
+const NO = '';
+const CORE = 'c';
+const ALL = '*';
+
 function convert() {
 	var supp_option = document.querySelector('input[name="supp"]:checked').value;
 	
@@ -64,7 +68,11 @@ function convert() {
 				var attr = table[value][1];
 				
 				if (value.codePointAt(0) <= 0xFFFF && value_char.codePointAt(0) > 0xFFFF) {
-					replace = (supp_option == "*") || (attr !== undefined && attr.includes("c"));
+					if (supp_option == ALL) {
+						replace = true
+					} else {
+						replace = (attr !== undefined && attr.includes(supp_option));
+					}
 				} else {
 					replace = true;
 				}
@@ -85,7 +93,6 @@ function convert() {
 		}
 	}
 	
-	document.getElementById('output_k').value = converted;
 	document.getElementById('output').value = converted;
 }
 
@@ -97,6 +104,21 @@ function paste() {
 	navigator.clipboard
 	.readText()
 	.then((clipText) => (document.getElementById("input").value = clipText));
+}
+
+function initOutputBox() {
+	var htmlContent = '<textarea id="output" rows="3" lang="'
+	+ document.querySelector('input[name="locale"]:checked').value
+	+ '" readonly></textarea>';
+	
+	var span = document.getElementById('output_textarea');
+	span.innerHTML = htmlContent;
+}
+
+function changeLocale() {
+	var text_output = document.getElementById('output').value;
+	initOutputBox();
+	document.getElementById('output').value = text_output;
 }
 
 BASIC_TABLE = {
