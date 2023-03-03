@@ -16,11 +16,17 @@
 		</p>
 		<h3><a href="https://github.com/haydenwong7bm/inherited-glyphs-converter">GitHub專頁</a></h3>
 		<div class="form">
-			<label for="input">要轉換的文字</label><br>
-			<textarea id="input" name="input" rows="5" lang=""></textarea>
-			<button onclick="convert();">轉換</button><br>
-			<label for="output">已轉換的文字</label><br>
-			<textarea id="output" name="output" rows="5" lang="ko"></textarea>
+			<label for="input">要轉換的文字</label>
+			<textarea id="input" name="input" rows="3" lang=""></textarea>
+			<button onclick="convert();">轉換</button>
+			<button onclick="paste();">從剪貼板貼上</button>
+			<br>
+			<label for="output">已轉換的文字</label>
+			<br>
+			<small>韓文語言環境</small><br>
+			<textarea id="output_k" rows="3" lang="ko" readonly></textarea>
+			<small>系統語言環境</small><br>
+			<textarea id="output" rows="3" lang="" readonly></textarea>
 			<button onclick="copy();">複製至剪貼板</button>
 		</div>
 		<h2><label>選項</label></h2>

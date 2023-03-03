@@ -16,11 +16,17 @@
 		</p>
 		<h3><a href="https://github.com/haydenwong7bm/inherited-glyphs-converter">GitHub Page</a></h3>
 		<div class="form">
-			<label for="input">Text to be converted</label><br>
-			<textarea id="input" name="input" rows="5" lang=""></textarea>
-			<button onclick="convert();">Convert</button><br>
-			<label for="output">Converted text</label><br>
-			<textarea id="output" name="output" rows="5" lang="ko"></textarea>
+			<label for="input">Text to be converted</label>
+			<textarea id="input" name="input" rows="3" lang=""></textarea>
+			<button onclick="convert();">Convert</button>
+			<button onclick="paste();">Paste from clipboard</button>
+			<br>
+			<label for="output">Converted text</label>
+			<br>
+			<small>Korean locale</small><br>
+			<textarea id="output_k" rows="3" lang="ko"></textarea>
+			<small>System language locale</small><br>
+			<textarea id="output" rows="3" lang="" readonly></textarea>
 			<button onclick="copy();">Copy to clipboard</button>
 		</div>
 		<h2><label>Options</label></h2>

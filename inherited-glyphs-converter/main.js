@@ -86,13 +86,20 @@ function convert() {
 		if (replace) {
 			converted = converted.replaceAll(chr, value);
 		}
-		
-	document.getElementById('output').value = converted;
 	}
+	
+	document.getElementById('output_k').value = converted;
+	document.getElementById('output').value = converted;
 }
 
 function copy() {
 	navigator.clipboard.writeText(document.getElementById('output').value)
+}
+
+function paste() {
+	navigator.clipboard
+	.readText()
+	.then((clipText) => (document.getElementById("input").value = clipText));
 }
 
 BASIC_TABLE = {
