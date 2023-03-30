@@ -2,7 +2,7 @@ const J = 'j';
 const K = 'k';
 const T = 't';
 
-const NO = '';
+const BMP_ONLY = '';
 const CORE = 'c';
 const ALL = '*';
 
