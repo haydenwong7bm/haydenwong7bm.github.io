@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 
-<html lang="ja">
+<html lang="ja" style="font-family:'Yu Gothic UI','源ノ角ゴシック JP','Source Han Sans','ヒラギノ角ゴ ProN W3','Hiragino Kaku Gothic ProN W3';">
 	<head>
 		<title>傳承字形󠄀轉換器</title>
 		<meta charset=utf-8 name="viewport" content="width=device-width, initial-scale=1.0">
@@ -25,13 +25,8 @@
 			<span id="output_textarea"></span>
 			<button onclick="copy();">複製至剪貼板</button><br>
 			
-			<b><label>語言環󠄁境</label></b><br>
-			<input type="radio" id="locale-ko" name="locale" value="ko" onclick="changeLocale();" checked>
-			<label for="locale-ko">韓󠄁國</label><br>
-			<input type="radio" id="locale-ja" name="locale" value="ja" onclick="changeLocale();">
-			<label for="locale-ja">日本</label><br>
-			<input type="radio" id="locale-" name="locale" value="" onclick="changeLocale();">
-			<label for="locale-">系統設定</label>
+			<input type="checkbox" id="locale" name="locale" onclick="changeLocale();">
+			<label for="locale">使󠄁用系統語言環󠄁境設定</label>
 		</div>
 		<div>
 			<h2><label>選󠄁項</label></h2>
@@ -52,8 +47,8 @@
 			<h3>其他</h3>
 			<input type="checkbox" id="n" name="n" checked>
 			<label for="n">轉換Unicode不能統一的󠄁字（例如：秘 → 祕、峰 → 峯）</label><br>
-			<!-- <input type="checkbox" id="ivs" name="ivs">
-			<label for="ivs">使󠄁用Adobe-Japan1異體字選󠄁擇器序列</label> -->
+			<input type="checkbox" id="ivs" name="ivs">
+			<label for="ivs">使󠄁用Adobe-Japan1異體字選󠄁擇器序列</label>
 		</div>
 	</body>
 </html>

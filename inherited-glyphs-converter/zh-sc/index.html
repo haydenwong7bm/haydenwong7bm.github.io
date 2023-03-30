@@ -25,33 +25,30 @@
 			<span id="output_textarea"></span>
 			<button onclick="copy();">拷贝至剪贴板</button><br>
 			
-			<b><label>语言环境</label></b><br>
-			<input type="radio" id="locale-ko" name="locale" value="ko" onclick="changeLocale();" checked>
-			<label for="locale-ko">韩国</label><br>
-			<input type="radio" id="locale-ja" name="locale" value="ja" onclick="changeLocale();">
-			<label for="locale-ja">日本</label><br>
-			<input type="radio" id="locale-" name="locale" value="" onclick="changeLocale();">
-			<label for="locale-">系统设置</label>
+			<input type="checkbox" id="locale" name="locale" onclick="changeLocale();">
+			<label for="locale">使用系统语言环境设置</label>
 		</div>
-		<h2><label>选项</label></h2>
-		<h3>使用<a href="https://zh.wikipedia.org/wiki/%E4%B8%AD%E6%97%A5%E9%9F%93%E7%9B%B8%E5%AE%B9%E8%A1%A8%E6%84%8F%E6%96%87%E5%AD%97">中日韩兼容表意文字</a></h3>
-		<input type="checkbox" id="j" name="j" checked>
-		<label for="j">日本</label><br>
-		<input type="checkbox" id="k" name="k" checked>
-		<label for="k">韩国</label><br>
-		<input type="checkbox" id="t" name="t" checked>
-		<label for="t"><a href="https://zh.wikipedia.org/wiki/%E4%B8%AD%E6%97%A5%E9%9F%93%E7%9B%B8%E5%AE%B9%E8%A1%A8%E6%84%8F%E6%96%87%E5%AD%97%E8%A3%9C%E5%85%85%E5%8D%80">CNS 11643</a></h3>
-		<h3>使用辅助平面字符</h3>
-		<input type="radio" id="supp-no" name="supp" value="">
-		<label for="supp-no">不使用<label><br>
-		<input type="radio" id="supp-c" name="supp" value="c" checked>
-		<label for="supp-c">只使用<a href="https://www.unicode.org/L2/L2019/19388-unihan-core-2020.pdf">UnihanCore2020</a>及<a href="https://github.com/adobe-type-tools/Adobe-Japan1">Adobe-Japan1</a></label><br>
-		<input type="radio" id="supp-*" name="supp" value="*">
-		<label for="supp-*">所有</label><br>
-		<h3>其他</h3>
-		<input type="checkbox" id="n" name="n" checked>
-		<label for="n">轉換Unicode不能统一的字（例如：秘 → 祕、峰 → 峯）</label><br>
-		<!-- <input type="checkbox" id="ivs" name="ivs">
-		<label for="ivs">使用Adobe-Japan1异体字选择器序列</label> -->
+		<div>
+			<h2><label>选项</label></h2>
+			<h3>使用<a href="https://zh.wikipedia.org/wiki/%E4%B8%AD%E6%97%A5%E9%9F%93%E7%9B%B8%E5%AE%B9%E8%A1%A8%E6%84%8F%E6%96%87%E5%AD%97">中日韩兼容表意文字</a></h3>
+			<input type="checkbox" id="j" name="j" checked>
+			<label for="j">日本</label><br>
+			<input type="checkbox" id="k" name="k" checked>
+			<label for="k">韩国</label><br>
+			<input type="checkbox" id="t" name="t" checked>
+			<label for="t"><a href="https://zh.wikipedia.org/wiki/%E4%B8%AD%E6%97%A5%E9%9F%93%E7%9B%B8%E5%AE%B9%E8%A1%A8%E6%84%8F%E6%96%87%E5%AD%97%E8%A3%9C%E5%85%85%E5%8D%80">CNS 11643</a></h3>
+			<h3>使用辅助平面字符</h3>
+			<input type="radio" id="supp-no" name="supp" value="">
+			<label for="supp-no">不使用<label><br>
+			<input type="radio" id="supp-c" name="supp" value="c" checked>
+			<label for="supp-c">只使用<a href="https://www.unicode.org/L2/L2019/19388-unihan-core-2020.pdf">UnihanCore2020</a>及<a href="https://github.com/adobe-type-tools/Adobe-Japan1">Adobe-Japan1</a></label><br>
+			<input type="radio" id="supp-*" name="supp" value="*">
+			<label for="supp-*">所有</label><br>
+			<h3>其他</h3>
+			<input type="checkbox" id="n" name="n" checked>
+			<label for="n">轉換Unicode不能统一的字（例如：秘 → 祕、峰 → 峯）</label><br>
+			<input type="checkbox" id="ivs" name="ivs">
+			<label for="ivs">使用Adobe-Japan1异体字选择器序列</label>
+		</div>
 	</body>
 </html>

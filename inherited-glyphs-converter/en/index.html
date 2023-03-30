@@ -25,33 +25,30 @@
 			<span id="output_textarea"></span>
 			<button onclick="copy();">Copy to clipboard</button><br>
 			
-			<b><label>Locale</label></b><br>
-			<input type="radio" id="locale-ko" name="locale" value="ko" onclick="changeLocale();" checked>
-			<label for="locale-ko">South Korea</label><br>
-			<input type="radio" id="locale-ja" name="locale" value="ja" onclick="changeLocale();">
-			<label for="locale-ja">Japan</label><br>
-			<input type="radio" id="locale-" name="locale" value="" onclick="changeLocale();">
-			<label for="locale-">System Setting</label>
+			<input type="checkbox" id="locale" name="locale" onclick="changeLocale();">
+			<label for="locale">Use system setting as locale</label>
 		</div>
-		<h2><label>Options</label></h2>
-		<h3>Use <a href="https://en.wikipedia.org/wiki/CJK_Compatibility_Ideographs>CJK Compatibility Ideographs">CJK Compatibility Ideographs</a></h3>
-		<input type="checkbox" id="j" name="j" checked>
-		<label for="j">Japan</label><br>
-		<input type="checkbox" id="k" name="k" checked>
-		<label for="k">South Korea</label><br>
-		<input type="checkbox" id="t" name="t" checked>
-		<label for="t"><a href="https://en.wikipedia.org/wiki/CJK_Compatibility_Ideographs_Supplement">CNS 11643</a></label>
-		<h3>Use Characters on Supplementary Planes</h3>
-		<input type="radio" id="supp-no" name="supp" value="">
-		<label for="supp-no">Don't use<label><br>
-		<input type="radio" id="supp-c" name="supp" value="c" checked>
-		<label for="supp-c">Only use <a href="https://www.unicode.org/L2/L2019/19388-unihan-core-2020.pdf">UnihanCore2020</a> and <a href="https://github.com/adobe-type-tools/Adobe-Japan1">Adobe-Japan1</a></label><br>
-		<input type="radio" id="supp-*" name="supp" value="*">
-		<label for="supp-*">All</label><br>
-		<h3>Others</h3>
-		<input type="checkbox" id="n" name="n" checked>
-		<label for="n">Convert variants that are not unifiable on Unicode (e.g.: 秘 → 祕, 峰	 → 峯)</label><br>
-		<!-- <input type="checkbox" id="ivs" name="ivs">
-		<label for="ivs">Use Adobe-Japan1 IVS</label> -->
+		<div>
+			<h2><label>Options</label></h2>
+			<h3>Use <a href="https://en.wikipedia.org/wiki/CJK_Compatibility_Ideographs>CJK Compatibility Ideographs">CJK Compatibility Ideographs</a></h3>
+			<input type="checkbox" id="j" name="j" checked>
+			<label for="j">Japan</label><br>
+			<input type="checkbox" id="k" name="k" checked>
+			<label for="k">South Korea</label><br>
+			<input type="checkbox" id="t" name="t" checked>
+			<label for="t"><a href="https://en.wikipedia.org/wiki/CJK_Compatibility_Ideographs_Supplement">CNS 11643</a></label>
+			<h3>Use Characters on Supplementary Planes</h3>
+			<input type="radio" id="supp-no" name="supp" value="">
+			<label for="supp-no">Don't use<label><br>
+			<input type="radio" id="supp-c" name="supp" value="c" checked>
+			<label for="supp-c">Only use <a href="https://www.unicode.org/L2/L2019/19388-unihan-core-2020.pdf">UnihanCore2020</a> and <a href="https://github.com/adobe-type-tools/Adobe-Japan1">Adobe-Japan1</a></label><br>
+			<input type="radio" id="supp-*" name="supp" value="*">
+			<label for="supp-*">All</label><br>
+			<h3>Others</h3>
+			<input type="checkbox" id="n" name="n" checked>
+			<label for="n">Convert variants that are not unifiable on Unicode (e.g.: 秘 → 祕, 峰	 → 峯)</label><br>
+			<input type="checkbox" id="ivs" name="ivs">
+			<label for="ivs">Use Adobe-Japan1 IVS</label>
+		</div>
 	</body>
 </html>
