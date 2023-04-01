@@ -7,7 +7,7 @@
 		<script src="../main.js"></script>
 		<link rel="stylesheet" href="../styles.css">
 	</head>
-	<body onload="initOutputBox();">
+	<body onload="initTextarea();">
 		<p style="text-align:left;">
 			<span style="font-size:28px; font-weight:bold">Inherited Glyphs Converter</span>
 			<span style="float:right;">
@@ -16,14 +16,15 @@
 		</p>
 		<h3><a href="https://github.com/haydenwong7bm/inherited-glyphs-converter">GitHub Page</a></h3>
 		<div>
-			<label for="input">Text to be converted</label><br>
-			<textarea id="input" name="input" rows="3" lang=""></textarea>
+			<label for="input_textarea">Text to be converted</label><br>
+			<span id="input_textarea"></span>
 			<button onclick="convert();">Convert</button>
 			<button onclick="paste();">Paste from clipboard</button><br>
 			
-			<label for="output">Converted text</label><br>
+			<label for="output_textarea">Converted text</label><br>
 			<span id="output_textarea"></span>
-			<button onclick="copy();">Copy to clipboard</button><br>
+			<button onclick="copy();">Copy to clipboard</button>
+			<button onclick="tweet();">Tweet</button><br>
 			
 			<input type="checkbox" id="locale" name="locale" onclick="changeLocale();">
 			<label for="locale">Use system setting as locale</label>

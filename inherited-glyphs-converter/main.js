@@ -37,6 +37,19 @@ function convert() {
 	}
 	
 	var text_input = document.getElementById('input').value;
+	
+	// Remove variation selectors
+	
+	for (ord = 0xfe00; ord <= 0xfe0f; ord++) {
+		text_input = text_input.replace(String.fromCodePoint(ord));
+	}
+	
+	for (ord = 0xe0100; ord <= 0xe01ef; ord++) {
+		text_input = text_input.replace(String.fromCodePoint(ord));
+	}
+	
+	// Main conversion
+	
 	var converted = text_input;
 	
 	var chr_cache = [];
@@ -128,21 +141,33 @@ function paste() {
 	.then((clipText) => (document.getElementById("input").value = clipText));
 }
 
-function initOutputBox() {
+function initTextarea() {
 	if (document.getElementById('locale').checked) {
-		htmlContent = '<textarea id="output" rows="3" lang="" readonly></textarea>';
+		htmlContent_input = '<textarea id="input" rows="3" lang=""></textarea>';
+		htmlContent_output = '<textarea id="output" rows="3" lang="" readonly></textarea>';
 	} else {
-		htmlContent = '<textarea id="output" rows="3" lang="ja" style="font-family:\'Yu Gothic UI\',\'源ノ角ゴシック JP\',\'Source Han Sans\',\'ヒラギノ角ゴ ProN W3\',\'Hiragino Kaku Gothic ProN W3\';" readonly></textarea>';
+		htmlContent_input = '<textarea id="input" rows="3" style="font-family:\'Yu Gothic UI\',\'源ノ角ゴシック JP\',\'Source Han Sans\',\'ヒラギノ角ゴ ProN W3\',\'Hiragino Kaku Gothic ProN W3\';" ></textarea>';
+		htmlContent_output = '<textarea id="output" rows="3" style="font-family:\'Yu Gothic UI\',\'源ノ角ゴシック JP\',\'Source Han Sans\',\'ヒラギノ角ゴ ProN W3\',\'Hiragino Kaku Gothic ProN W3\';" readonly></textarea>';
 	}
 	
+	var span = document.getElementById('input_textarea');
+	span.innerHTML = htmlContent_input;
+	
 	var span = document.getElementById('output_textarea');
-	span.innerHTML = htmlContent;
+	span.innerHTML = htmlContent_output;
 }
 
 function changeLocale() {
+	var text_input = document.getElementById('input').value;
 	var text_output = document.getElementById('output').value;
-	initOutputBox();
+	initTextarea();
+	document.getElementById('input').value = text_input;
 	document.getElementById('output').value = text_output;
+}
+
+function tweet() {
+	text_output = document.getElementById('output').value;
+	window.open("https://twitter.com/intent/tweet?text=" + encodeURIComponent(text_output));
 }
 
 BASIC_TABLE = {
