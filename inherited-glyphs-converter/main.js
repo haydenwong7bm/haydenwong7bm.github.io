@@ -41,11 +41,11 @@ function convert() {
 	// Remove variation selectors
 	
 	for (ord = 0xfe00; ord <= 0xfe0f; ord++) {
-		text_input = text_input.replace(String.fromCodePoint(ord));
+		text_input = text_input.replace(String.fromCodePoint(ord), '');
 	}
 	
 	for (ord = 0xe0100; ord <= 0xe01ef; ord++) {
-		text_input = text_input.replace(String.fromCodePoint(ord));
+		text_input = text_input.replace(String.fromCodePoint(ord), '');
 	}
 	
 	// Main conversion
