@@ -146,8 +146,8 @@ function initTextarea() {
 		htmlContent_input = '<textarea id="input" rows="3" lang=""></textarea>';
 		htmlContent_output = '<textarea id="output" rows="3" lang="" readonly></textarea>';
 	} else {
-		htmlContent_input = '<textarea id="input" rows="3" style="font-family:\'Yu Gothic UI\',\'源ノ角ゴシック JP\',\'Source Han Sans JP\',\'ヒラギノ角ゴ ProN W3\',\'Hiragino Kaku Gothic ProN W3\';" ></textarea>';
-		htmlContent_output = '<textarea id="output" rows="3" style="font-family:\'Yu Gothic UI\',\'源ノ角ゴシック JP\',\'Source Han Sans JP\',\'ヒラギノ角ゴ ProN W3\',\'Hiragino Kaku Gothic ProN W3\';" readonly></textarea>';
+		htmlContent_input = '<textarea id="input" rows="3" style="font-family:\'Yu Gothic UI\',\'源ノ角ゴシック JP\',\'Source Han Sans\',\'ヒラギノ角ゴ ProN W3\',\'Hiragino Kaku Gothic ProN W3\';" ></textarea>';
+		htmlContent_output = '<textarea id="output" rows="3" style="font-family:\'Yu Gothic UI\',\'源ノ角ゴシック JP\',\'Source Han Sans\',\'ヒラギノ角ゴ ProN W3\',\'Hiragino Kaku Gothic ProN W3\';" readonly></textarea>';
 	}
 	
 	var span = document.getElementById('input_textarea');

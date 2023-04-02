@@ -3,12 +3,8 @@ textarea {
 	width: 95%;
 	max-width: 480px;
 	display: block;
-	}
+}
 
-html:lang(zh-Hant), button:lang(zh-Hant) {
-	font-family: 'Yu Gothic UI','源ノ角ゴシック JP','Source Han Sans JP','ヒラギノ角ゴ ProN W3','Hiragino Kaku Gothic ProN W3';
-	}
-
-html:lang(zh-Hans), button:lang(zh-Hans) {
-	font-family: 'Yu Gothic UI','源ノ角ゴシック JP','Source Han Sans JP','ヒラギノ角ゴ ProN W3','Hiragino Kaku Gothic ProN W3';
-	}
+html:lang(zh-Hant), button:lang(zh-Hant), html:lang(zh-Hans), button:lang(zh-Hans), html:lang(ja), button:lang(ja) {
+	font-family: 'Yu Gothic UI', '源ノ角ゴシック JP', 'Source Han Sans', 'ヒラギノ角ゴ ProN W3', 'Hiragino Kaku Gothic ProN W3';
+}
