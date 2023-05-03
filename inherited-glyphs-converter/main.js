@@ -56,68 +56,82 @@ function convert() {
 	
 	for (const chr of text_input) {
 		if (!chr_cache.includes(chr)) {
-			value = chr;
-			replace = false;
+			var replace = false;
 			
-			if (BASIC_TABLE[value] !== undefined) {
-				const value_char = BASIC_TABLE[value][0];
+			var temp;
+			var value = chr;
+			var attr;
+			
+			temp = BASIC_TABLE[value];
+			if (temp !== undefined) {
+				value = temp[0];
+				attr = temp[1];
 				
-				var attr = BASIC_TABLE[value][1];
 				if (attr == undefined) {
 					attr = "";
 				}
 				
-				if (value.codePointAt(0) <= 0xFFFF && value_char.codePointAt(0) > 0xFFFF) {
-					replace = Boolean(supp_option);
-					if (supp_option == CORE) {
-						replace = attr.includes(supp_option);
-					}
+				if (attr.includes(N)) {
+					replace = use_not_unifiable;
 				} else {
 					replace = true;
 				}
-				
-				if (replace && attr.includes(N)) {
-					replace = use_not_unifiable;
-				}
-				
-				if (replace) {
-					value = value_char;
+			} else {
+				temp = RADICALS_VARIANTS_TABLE[chr]
+				if (temp !== undefined) {
+					value = temp
+					replace = true;
 				}
 			}
 			
-			if (RADICALS_VARIANTS_TABLE[value] !== undefined) {
-				value = RADICALS_VARIANTS_TABLE[chr];
-				replace = true;
+			console.log(chr, value, replace);
+			
+			// ---
+			
+			var value_new = value;
+			var attr_new = attr;
+			
+			var temp_flag = false;
+			for (var table of comp_order) {
+				temp = table[value];
+				if (temp !== undefined) {
+					value_new = temp[0];
+					attr_new = temp[1];
+					
+					if (attr_new == undefined) {
+						attr_new = "";
+					}
+					
+					replace = true;
+					temp_flag = true;
+				}
+			}
+			
+			if (use_ivs && !temp_flag) {
+				temp = IVS_TABLE[value];
+				if (temp !== undefined) {
+					value_new = temp
+					replace = true;
+				}
 			}
 			
 			// ---
 			
-			use_comp = false;
-			for (var table of comp_order) {
-				if (table[value] !== undefined) {
-					const value_char = table[value][0];
-					var attr = table[value][1];
-					
-					if (value.codePointAt(0) <= 0xFFFF && value_char.codePointAt(0) > 0xFFFF) {
-						if (supp_option == ALL) {
-							replace = true;
-						} else {
-							replace = (attr !== undefined && attr.includes(supp_option));
-						}
-					} else {
-						replace = true;
-					}
-					
-					if (replace) {
-						value = value_char;
-						use_comp = true;
-					}
+			if (chr.codePointAt(0) <= 0xFFFF && value_new.codePointAt(0) > 0xFFFF) {
+				if (Boolean(supp_option)) {
+					value = value_new;
+					attr = attr_new;
 				}
+			} else {
+				value = value_new;
+				attr = attr_new;
 			}
 			
-			if (use_ivs && !use_comp && IVS_TABLE[value] !== undefined) {
-				value = IVS_TABLE[value];
-				replace = true;
+			if (chr.codePointAt(0) <= 0xFFFF && value.codePointAt(0) > 0xFFFF) {
+				replace = Boolean(supp_option);
+				if (supp_option == CORE) {
+					replace = attr.includes(CORE);
+				}
 			}
 			
 			if (replace) {
@@ -428,7 +442,6 @@ BASIC_TABLE = {
 	"𡨡": ["寏"],
 	"寜": ["寧"],
 	"寛": ["寬"],
-	"専": ["專"],
 	"𫴰": ["對"],
 	"尓": ["尔"],
 	"尚": ["尙"],
@@ -488,7 +501,6 @@ BASIC_TABLE = {
 	"悦": ["悅"],
 	"悮": ["悞"],
 	"惪": ["悳"],
-	"恵": ["惠"],
 	"𢚾": ["愌"],
 	"𭐫": ["愛"],
 	"𢝾": ["愮"],
@@ -761,7 +773,6 @@ BASIC_TABLE = {
 	"𥝝": ["秊"],
 	"税": ["稅"],
 	"𥟑": ["稗"],
-	"穂": ["穗"],
 	"𫞹": ["空"],
 	"𥤮": ["突"],
 	"𥨤": ["竂"],
@@ -1533,7 +1544,6 @@ J_TABLE = {
 	"塚": ["塚"],
 	"晴": ["晴"],
 	"猪": ["猪"],
-	"益": ["益"],
 	"礼": ["礼"],
 	"神": ["神"],
 	"祥": ["祥"],
@@ -1563,7 +1573,6 @@ J_TABLE = {
 	"憎": ["憎"],
 	"懲": ["懲"],
 	"敏": ["敏"],
-	"既": ["既"],
 	"旣": ["既"],
 	"暑": ["暑"],
 	"梅": ["梅"],
@@ -1603,6 +1612,7 @@ J_TABLE = {
 	"廊": ["廊"],
 	"朗": ["朗"],
 	"類": ["類"],
+	"益": ["益"],
 };
 
 K_TABLE = {
@@ -1990,7 +2000,7 @@ IVS_TABLE = {
 	"儚": "儚󠄀",
 	"儲": "儲󠄁",
 	"兆": "兆󠄀",
-	"免": "免󠄁",
+	"免": "免󠄀",
 	"兎": "兎󠄁",
 	"兔": "兔󠄁",
 	"全": "全󠄁",
