@@ -4,7 +4,8 @@ const T = 't';
 
 const N = 'n'
 
-const IVS = 'ivs';
+const IVS_AD = 'ivs_ad';
+const IVS_MS = 'ivs_ms';
 
 const BMP_ONLY = '';
 const CORE = 'c';
@@ -17,7 +18,7 @@ function convert() {
 	
 	var replaced_cache = [];
 	
-	var use_ivs = document.getElementById(IVS).checked;
+	var priority = document.querySelector('input[name="priority"]:checked').value;
 	
 	var comp_order = [];
 	for (const opt of [J, K, T]) {
@@ -34,6 +35,19 @@ function convert() {
 					break;
 			}
 		}
+	}
+	
+	var ivs_order = [];
+	for (const opt of [IVS_AD, IVS_MS]) {
+		if (document.getElementById(opt).checked) {
+			ivs_order.push(opt);
+		}
+	}
+	
+	ivs_order = ivs_order.filter(item => item !== priority);
+	
+	if (document.getElementById(priority).checked) {
+		ivs_order.unshift(priority);
 	}
 	
 	var text_input = document.getElementById('input').value;
@@ -84,8 +98,6 @@ function convert() {
 				}
 			}
 			
-			console.log(chr, value, replace);
-			
 			// ---
 			
 			var value_new = value;
@@ -104,14 +116,29 @@ function convert() {
 					
 					replace = true;
 					temp_flag = true;
+					
+					break
 				}
 			}
 			
-			if (use_ivs && !temp_flag) {
-				temp = IVS_TABLE[value];
-				if (temp !== undefined) {
-					value_new = temp
-					replace = true;
+			if (!temp_flag) {
+				for (var ivs of ivs_order) {
+					switch (ivs) {
+						case IVS_AD:
+							table = IVS_AD_TABLE;
+							break;
+						case IVS_MS:
+							table = IVS_MS_TABLE;
+							break;
+					}	
+					
+					temp = table[value];
+					if (temp !== undefined) {
+						value_new = temp
+						replace = true;
+						
+						break;
+					}
 				}
 			}
 			
@@ -1961,7 +1988,7 @@ RADICALS_VARIANTS_TABLE = {
 	'⻱': '⿔',
 };
 
-IVS_TABLE = {
+IVS_AD_TABLE = {
 	"㐂": "㐂󠄀",
 	"丈": "丈󠄁",
 	"与": "与󠄁",
@@ -3166,4 +3193,55 @@ IVS_TABLE = {
 	"𩵋": "𩵋󠄀",
 	"𩸽": "𩸽󠄀",
 	"𪘚": "𪘚󠄁",
+};
+
+IVS_MS_TABLE = {
+	"䁘": "䁘󠄂",
+	"䎗": "䎗󠄁",
+	"䘕": "䘕󠄁",
+	"䤾": "䤾󠄁",
+	"䨩": "䨩󠄂",
+	"乸": "乸󠄁",
+	"倩": "倩󠄄",
+	"凑": "凑󠄂",
+	"啫": "啫󠄁",
+	"嚤": "嚤󠄁",
+	"姸": "姸󠄂",
+	"岍": "岍󠄃",
+	"岭": "岭󠄂",
+	"樋": "樋󠄅",
+	"汧": "汧󠄅",
+	"淎": "淎󠄂",
+	"瀞": "瀞󠄉",
+	"熮": "熮󠄂",
+	"熻": "熻󠄁",
+	"硏": "硏󠄄",
+	"窰": "窰󠄂",
+	"綉": "綉󠄂",
+	"綫": "綫󠄂",
+	"翬": "翬󠄂",
+	"翱": "翱󠄁",
+	"翺": "翺󠄃",
+	"茺": "茺󠄄",
+	"菁": "菁󠄇",
+	"蒨": "蒨󠄆",
+	"蔴": "蔴󠄄",
+	"踭": "踭󠄁",
+	"邨": "邨󠄇",
+	"銹": "銹󠄂",
+	"鍮": "鍮󠄄",
+	"靜": "靜󠄉",
+	"靭": "靭󠄆",
+	"飬": "飬󠄂",
+	"餸": "餸󠄁",
+	"驣": "驣󠄁",
+	"黙": "黙󠄂",
+	"𡩴": "𡩴󠄁",
+	"𥖄": "𥖄󠄁",
+	"𦏹": "𦏹󠄁",
+	"𦐐": "𦐐󠄁",
+	"𦐹": "𦐹󠄁",
+	"𦒉": "𦒉󠄃",
+	"𧝁": "𧝁󠄁",
+	"𬽺": "𬽺󠄁",
 };
