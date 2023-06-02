@@ -9,29 +9,29 @@
 	</head>
 	<body onload="initTextarea();" lang="ja">
 		<p style="text-align:left;">
-			<span style="font-size:28px; font-weight:bold">传承字形󠄀转換器</span>
+			<span style="font-size:28px; font-weight:bold">传承字形转換器</span>
 			<span style="float:right;">
 				<a href="../zh-tc/">繁中</a> <a href="../en/">EN</a>
 			</span>
 		</p>
 		<h3><a href="https://github.com/haydenwong7bm/inherited-glyphs-converter">GitHub专页</a></h3>
 		<div>
-			<label for="input_textarea">要转換的󠄁文本</label>
+			<label for="input_textarea">要转換的󠄁文󠄁本</label>
 			<span id="input_textarea"></span>
 			<button onclick="convert();">转換</button>
 			<button onclick="paste();">从剪贴板粘贴</button><br>
 			
-			<label for="output_textarea">已转換的󠄁文本</label><br>
+			<label for="output_textarea">已转換的󠄁文󠄁本</label><br>
 			<span id="output_textarea"></span>
 			<button onclick="copy();">拷󠄁贝至剪贴板</button>
 			<button onclick="tweet();">Tweet</button><br>
 			
 			<input type="checkbox" id="locale" name="locale" onclick="changeLocale();">
-			<label for="locale">使󠄁用系统语言环境设置󠄀</label>
+			<label for="locale">使󠄁用系统语言环境设置</label>
 		</div>
 		<div>
 			<h2><label>选项</label></h2>
-			<h3>使用<a href="https://zh.wikipedia.org/wiki/%E4%B8%AD%E6%97%A5%E9%9F%93%E7%9B%B8%E5%AE%B9%E8%A1%A8%E6%84%8F%E6%96%87%E5%AD%97">中日韩兼󠄁容表意󠄁文󠄁字</a></h3>
+			<h3>使󠄁用<a href="https://zh.wikipedia.org/wiki/%E4%B8%AD%E6%97%A5%E9%9F%93%E7%9B%B8%E5%AE%B9%E8%A1%A8%E6%84%8F%E6%96%87%E5%AD%97">中日韩兼󠄁容表意󠄁文󠄁字</a></h3>
 			<input type="checkbox" id="j" name="j" checked>
 			<label for="j">日本</label><br>
 			<input type="checkbox" id="k" name="k" checked>
@@ -44,12 +44,12 @@
 			<input type="radio" id="supp-c" name="supp" value="c" checked>
 			<label for="supp-c">只使󠄁用<a href="https://www.unicode.org/L2/L2019/19388-unihan-core-2020.pdf">UnihanCore2020</a>及󠄁<a href="https://github.com/adobe-type-tools/Adobe-Japan1">Adobe-Japan1</a></label><br>
 			<input type="radio" id="supp-*" name="supp" value="*">
-			<label for="supp-*">所󠄁有󠄀</label><br>
+			<label for="supp-*">所󠄁有</label><br>
 			<h3>异体字选择器序列</h3>
 			<table>
 				<tr>
 					<td>優先</td>
-					<td>使用</td>
+					<td>使󠄁用</td>
 				</tr>
 				<tr>
 					<td><input type="radio" id="priority_ad" name="priority" value="ivs_ad" checked></td>
@@ -64,7 +64,7 @@
 			</table>
 			<h3>其他</h3>
 			<input type="checkbox" id="n" name="n" checked>
-			<label for="n">轉換Unicode不能统一的字（例如：秘 → 祕、峰 → 峯）</label>
+			<label for="n">轉換Unicode不能统一的󠄁字（例如：秘 → 祕、峰 → 峯）</label>
 		</div>
 	</body>
 </html>
