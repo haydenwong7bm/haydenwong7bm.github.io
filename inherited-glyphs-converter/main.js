@@ -27,13 +27,13 @@ function convert() {
 		if (document.getElementById(opt).checked) {
 			switch (opt) {
 				case J:
-					comp_order.push(J_TABLE);
+					comp_order.push([J, J_TABLE]);
 					break;
 				case K:
-					comp_order.push(K_TABLE);
+					comp_order.push([K, K_TABLE]);
 					break;
 				case T:
-					comp_order.push(T_TABLE);
+					comp_order.push([T, T_TABLE]);
 					break;
 			}
 		}
@@ -100,7 +100,10 @@ function convert() {
 			var attr_new = attr;
 			
 			var temp_flag = false;
+			var char_locale;
+			
 			for (var table of comp_order) {
+				[char_locale, table] = table;
 				temp = table[value];
 				if (temp !== undefined) {
 					value_new = temp[0];
@@ -110,7 +113,7 @@ function convert() {
 						attr_new = "";
 					}
 					
-					if (ivs_order && attr_new.includes(K) && attr_new.includes(IVS_COMP_CLASH)) {
+					if (ivs_order.length && char_locale == K && attr_new.includes(IVS_COMP_CLASH)) {
 						continue;
 					}
 					
