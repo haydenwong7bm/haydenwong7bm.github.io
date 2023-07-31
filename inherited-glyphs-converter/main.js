@@ -110,7 +110,7 @@ function convert() {
 						attr_new = "";
 					}
 					
-					if (ivs_order && attr_new.includes("'")) {
+					if (ivs_order && attr_new.includes(K) && attr_new.includes(IVS_COMP_CLASH)) {
 						continue;
 					}
 					
