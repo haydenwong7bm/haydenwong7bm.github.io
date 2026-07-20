@@ -20,7 +20,21 @@ let tTable = {};
 let ivsADTable = {};
 let ivsMSTable = {};
 
-const varTargets = {jTable: 'j', kTable: 'k', tTable: 't'};
+const varTargets = {J: jTable, K: kTable, T: tTable};
+
+let isTableLoaded = false;
+
+// Helper function to explicitly strip variation selectors from any string
+function stripVariationSelectors(str) {
+  let result = str;
+  for (let ord = 0xfe00; ord <= 0xfe0f; ord++) {
+    result = result.replaceAll(String.fromCodePoint(ord), '');
+  }
+  for (let ord = 0xe0100; ord <= 0xe01ef; ord++) {
+    result = result.replaceAll(String.fromCodePoint(ord), '');
+  }
+  return result;
+}
 
 async function loadTable() {
   const variant_url = 'https://raw.githubusercontent.com/haydenwong7bm/inherited-glyphs-converter/main/inheritedglyphs/conversion-tables/variants_list.txt';
@@ -31,40 +45,42 @@ async function loadTable() {
     
     const text = await response.text();
     
-    // Clear old data
     variantTable = {};
     jTable = {};
     kTable = {};
     tTable = {};
     
+    varTargets[J] = jTable;
+    varTargets[K] = kTable;
+    varTargets[T] = tTable;
+    
     text.split('\n').forEach(line => {
       if (line.trim()) {
-        const [key, valueStr] = line.split('\t');
+        const [key, valueStr] = line.trim().split(/\t(.*)/);
         
         if (key && valueStr) {
-          // Split the value string by tabs (\t) and clean up extra spaces
           const valueTuple = valueStr.split('\t').map(item => item.trim()).filter(item => item);
-          
-          const regex = /[jkt]/g
-          
-		  if (valueTuple.length > 1) {
-            if regex.test(valueTuple[1]) {
-              for (const flag of ["j", "k", "t"]) {
+		  
+          const regex = /[jkt]/g;
+		  
+          if (valueTuple.length > 1) {
+            if (regex.test(valueTuple[1])) {
+              for (const flag of [J, K, T]) {
                 if (valueTuple[1].includes(flag)){
-				  valueTuple_ = [...valueTuple]
+                  let valueTuple_ = [...valueTuple];
                   valueTuple_[1] = valueTuple_[1].replace(regex, "");
                   
                   if (valueTuple_[1].length === 0) {
                     valueTuple_.splice(1, 1);
                   }
-                  
+				  
                   varTargets[flag][key] = valueTuple_;
                 }
               }
-            } else {
-              variantTable[key] = valueTuple;
             }
-		  }
+          } else {
+            variantTable[key] = valueTuple;
+          }
         }
       }
     });
@@ -72,96 +88,68 @@ async function loadTable() {
     console.error("Failed to load the variant table:", error);
   }
   
-  //
+  const parsedADTable = {};
+  const parsedMSTable = {};
   
-  const ivsADTable = {};
-  const ivs_ad_url = 'https://raw.githubusercontent.com/haydenwong7bm/inherited-glyphs-converter/main/inheritedglyphs/conversion-tables/ivs-adobe-japan1.txt';
-
-  try {
-    const response = await fetch(ivs_ad_url);
-    if (!response.ok) {
-      throw new Error(`HTTP error! Status: ${response.status}`);
+  const ivsConfigs = [
+    {
+      url: 'https://raw.githubusercontent.com/haydenwong7bm/inherited-glyphs-converter/main/inheritedglyphs/conversion-tables/ivs-adobe-japan1.txt',
+      targetMap: parsedADTable
+    },
+    {
+      url: 'https://raw.githubusercontent.com/haydenwong7bm/inherited-glyphs-converter/main/inheritedglyphs/conversion-tables/ivs-mscs.txt',
+      targetMap: parsedMSTable
     }
-    
-    const text = await response.text();
-    
-    text.split('\n').forEach(line => {
-      // Ignore empty lines and comment lines (if the file has them, e.g., starting with #)
-      if (line.trim() && !line.trim().startsWith('#')) {
-        
-        // Destructure only the key and value0, ignoring value1/flags entirely
-        const [key, value0] = line.split(',');
-        
-        if (key && value0) {
-          ivsADTable[key.trim()] = value0.trim();
-        }
-      }
-    });
-	
-  } catch (error) {
-    console.error("Failed to load or parse the table file:", error);
-  }
-  
-  //
-  
-  const ivsADTable = {};
-  const ivs_ms_url = 'https://raw.githubusercontent.com/haydenwong7bm/inherited-glyphs-converter/main/inheritedglyphs/conversion-tables/ivs-mscs.txt';
+  ];
 
-  try {
-    const response = await fetch(ivs_ms_url);
-    if (!response.ok) {
-      throw new Error(`HTTP error! Status: ${response.status}`);
-    }
-    
-    const text = await response.text();
-    
-    text.split('\n').forEach(line => {
-      // Ignore empty lines and comment lines (if the file has them, e.g., starting with #)
-      if (line.trim() && !line.trim().startsWith('#')) {
-        
-        // Destructure only the key and value0, ignoring value1/flags entirely
-        const [key, value0] = line.split(',');
-        
-        if (key && value0) {
-          ivsADTable[key.trim()] = value0.trim();
-        }
+  for (const config of ivsConfigs) {
+    try {
+      const response = await fetch(config.url);
+      if (!response.ok) {
+        throw new Error(`HTTP error! Status: ${response.status}`);
       }
-    });
-	
-  } catch (error) {
-    console.error("Failed to load or parse the table file:", error);
+      
+      const text = await response.text();
+      
+      text.split('\n').forEach(line => {
+        const [key, value0] = line.split('\t');
+          
+        if (key && value0) {
+          // CRITICAL FIX: Ensure the lookup key is stripped of any variation selectors 
+          // that might exist in the data file so it perfectly aligns with your stripped text input.
+          const cleanKey = stripVariationSelectors(key.trim());
+          config.targetMap[cleanKey] = value0.trim();
+        }
+      });
+      
+    } catch (error) {
+      console.error(`Failed to load or parse table from ${config.url}:`, error);
+    }
   }
+
+  ivsADTable = parsedADTable;
+  ivsMSTable = parsedMSTable;
+  isTableLoaded = true;
 }
 
-loadTable();
-
 function convert() {
-    var supp_option = document.querySelector('input[name="supp"]:checked').value;
+    let supp_option = document.querySelector('input[name="supp"]:checked').value;
+    let use_not_unifiable = document.getElementById(N).checked;
+    let replaced_cache = [];
+    let priority = document.querySelector('input[name="priority"]:checked').value;
     
-    var use_not_unifiable = document.getElementById(N).checked;
-    
-    var replaced_cache = [];
-    
-    var priority = document.querySelector('input[name="priority"]:checked').value;
-    
-    var comp_order = [];
+    let comp_order = [];
     for (const opt of [J, K, T]) {
         if (document.getElementById(opt).checked) {
             switch (opt) {
-                case J:
-                    comp_order.push([J, jTable]);
-                    break;
-                case K:
-                    comp_order.push([K, kTable]);
-                    break;
-                case T:
-                    comp_order.push([T, tTable]);
-                    break;
+                case J: comp_order.push([J, jTable]); break;
+                case K: comp_order.push([K, kTable]); break;
+                case T: comp_order.push([T, tTable]); break;
             }
         }
     }
     
-    var ivs_order = [];
+    let ivs_order = [];
     for (const opt of [IVS_AD, IVS_MS]) {
         if (document.getElementById(opt).checked) {
             ivs_order.push(opt);
@@ -169,40 +157,30 @@ function convert() {
     }
     
     ivs_order = ivs_order.filter(item => item !== priority);
-    
     if (document.getElementById(priority).checked) {
         ivs_order.unshift(priority);
     }
     
-    var text_input = document.getElementById('input').value;
+    let text_input = document.getElementById('input').value;
     
-    // Remove variation selectors
+    text_input = stripVariationSelectors(text_input);
     
-    for (ord = 0xfe00; ord <= 0xfe0f; ord++) {
-        text_input = text_input.replaceAll(String.fromCodePoint(ord), '');
-    }
+    let converted = text_input;
+    let chr_cache = [];
     
-    for (ord = 0xe0100; ord <= 0xe01ef; ord++) {
-        text_input = text_input.replaceAll(String.fromCodePoint(ord), '');
-    }
+    const chars = Array.from(text_input);
     
-    // Main conversion
-    
-    var converted = text_input;
-    
-    var chr_cache = [];
-    
-    for (const chr of text_input) {
+    for (const chr of chars) {
         if (!chr_cache.includes(chr)) {
-            var replace = false;
+            let replace = false;
+            let temp;
+            let value = chr;
+            let attr;
             
-            var temp;
-            var value = chr;
-            var attr;
-            
-            temp = variantTable[value];
+            temp = variantTable[chr];
             if (temp !== undefined) {
                 value = temp[0];
+				console.log(value.codePointAt(0));
                 attr = temp[1];
                 
                 if (attr == undefined) {
@@ -216,15 +194,12 @@ function convert() {
                 }
             }
             
-            // ---
+            let value_new = value;
+            let attr_new = attr;
+            let temp_flag = false;
+            let char_locale;
             
-            var value_new = value;
-            var attr_new = attr;
-            
-            var temp_flag = false;
-            var char_locale;
-            
-            for (var table of comp_order) {
+            for (let table of comp_order) {
                 [char_locale, table] = table;
                 temp = table[value];
                 if (temp !== undefined) {
@@ -246,28 +221,25 @@ function convert() {
                 }
             }
             
+			console.log(temp_flag);
+			
             if (!temp_flag) {
-                for (var ivs of ivs_order) {
+                for (let ivs of ivs_order) {
+                    let ivsTable;
                     switch (ivs) {
-                        case IVS_AD:
-                            table = ivsADTable;
-                            break;
-                        case IVS_MS:
-                            table = ivsMSTable;
-                            break;
-                    }    
+                        case IVS_AD: ivsTable = ivsADTable; break;
+                        case IVS_MS: ivsTable = ivsMSTable; break;
+                    }
                     
-                    temp = table[value];
+                    temp = ivsTable[value];
+					console.log(value, temp);
                     if (temp !== undefined) {
-                        value_new = temp
+                        value_new = temp;
                         replace = true;
-                        
                         break;
                     }
                 }
             }
-            
-            // ---
             
             if (chr.codePointAt(0) <= 0xFFFF && value_new.codePointAt(0) > 0xFFFF) {
                 if (Boolean(supp_option)) {
@@ -316,16 +288,13 @@ function initTextarea() {
         htmlContent_output = '<textarea id="output" rows="3" style="font-family:\'Yu Gothic UI\',\'源ノ角ゴシック JP\',\'Source Han Sans\',\'ヒラギノ角ゴ ProN W3\',\'Hiragino Kaku Gothic ProN W3\';" readonly></textarea>';
     }
     
-    var span = document.getElementById('input_textarea');
-    span.innerHTML = htmlContent_input;
-    
-    var span = document.getElementById('output_textarea');
-    span.innerHTML = htmlContent_output;
+    document.getElementById('input_textarea').innerHTML = htmlContent_input;
+    document.getElementById('output_textarea').innerHTML = htmlContent_output;
 }
 
 function changeLocale() {
-    var text_input = document.getElementById('input').value;
-    var text_output = document.getElementById('output').value;
+    let text_input = document.getElementById('input').value;
+    let text_output = document.getElementById('output').value;
     initTextarea();
     document.getElementById('input').value = text_input;
     document.getElementById('output').value = text_output;
@@ -335,3 +304,10 @@ function x_post() {
     text_output = document.getElementById('output').value;
     window.open("https://x.com/intent/post?text=" + encodeURIComponent(text_output));
 }
+
+async function init() {
+  initTextarea();
+  await loadTable();
+}
+
+init();
